@@ -1,6 +1,6 @@
 # Crossy Roads Game
 
-Welcome to the **Crossy Roads Game**! This project is a web-based implementation of the classic arcade-style game where players navigate their character across roads, rivers, and other obstacles while avoiding collisions.
+Welcome to the **Crossy Roads Game**! This project is a web-based implementation of the classic arcade-style game where players navigate their character across roads, rivers, and other obstacles while avoiding collisions. Visit the site : https://crossy-roads.netlify.app
 
 ## Features
 
