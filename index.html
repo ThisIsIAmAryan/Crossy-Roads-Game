@@ -7,21 +7,24 @@
     <title>Crossy Roads</title>
   </head>
   <body>
-    <canvas class="game"></canvas>
-    <div id="controls">
-      <div>
-        <button id="forward">▲</button>
-        <button id="left">◀</button>
-        <button id="backward">▼</button>
-        <button id="right">▶</button>
+    <div id="game-container">
+      <canvas class="game"></canvas>
+      <div id="controls">
+        <div>
+          <button id="forward">▲</button>
+          <button id="left">◀</button>
+          <button id="backward">▼</button>
+          <button id="right">▶</button>
+        </div>
       </div>
-    </div>
-    <div id="score">0</div>
-    <div id="result-container">
-      <div id="result">
-        <h1>Game Over</h1>
-        <p>Your score: <span id="final-score"></span></p>
-        <button id="retry">Retry</button>
+      <div id="score">0</div>
+      <button id="music-toggle" title="Toggle Music">🎵</button>
+      <div id="result-container">
+        <div id="result">
+          <h1>Game Over</h1>
+          <p>Your score: <span id="final-score"></span></p>
+          <button id="retry">Retry</button>
+        </div>
       </div>
     </div>
     <script type="module" src="/src/main.js"></script>

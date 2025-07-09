@@ -2,7 +2,12 @@ import * as THREE from "three";
 
 export function Camera() {
   const size = 300;
-  const viewRatio = window.innerWidth / window.innerHeight;
+  
+  // Use container dimensions for aspect ratio calculation
+  const container = document.getElementById("game-container");
+  const containerRect = container ? container.getBoundingClientRect() : { width: 800, height: 600 };
+  const viewRatio = containerRect.width / containerRect.height;
+  
   const width = viewRatio < 1 ? size : size * viewRatio;
   const height = viewRatio < 1 ? size / viewRatio : size;
 

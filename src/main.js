@@ -7,6 +7,8 @@ import { map, initializeMap } from "./components/Map";
 import { animateVehicles } from "./animateVehicles";
 import { animatePlayer } from "./animatePlayer";
 import { hitTest } from "./hitTest";
+import { audioManager } from "./audioManager";
+import { resetGame, isGameRunning } from "./gameState";
 import "./style.css";
 import "./collectUserInput";
 
@@ -34,21 +36,51 @@ document
   ?.addEventListener("click", initializeGame);
 
 function initializeGame() {
+  // Reset game state
+  resetGame();
+  
   initializePlayer();
   initializeMap();
 
   // Initialize UI
   if (scoreDOM) scoreDOM.innerText = "0";
   if (resultDOM) resultDOM.style.visibility = "hidden";
+  
+  // Restart ambient music
+  audioManager.startAmbientMusic();
 }
 
 const renderer = Renderer();
 renderer.setAnimationLoop(animate);
 
+// Handle window resize
+window.addEventListener('resize', () => {
+  const container = document.getElementById("game-container");
+  if (container) {
+    const containerRect = container.getBoundingClientRect();
+    renderer.setSize(containerRect.width, containerRect.height);
+    
+    // Update camera if needed
+    const size = 300;
+    const viewRatio = containerRect.width / containerRect.height;
+    const width = viewRatio < 1 ? size : size * viewRatio;
+    const height = viewRatio < 1 ? size / viewRatio : size;
+    
+    camera.left = width / -2;
+    camera.right = width / 2;
+    camera.top = height / 2;
+    camera.bottom = height / -2;
+    camera.updateProjectionMatrix();
+  }
+});
+
 function animate() {
-  animateVehicles();
-  animatePlayer();
-  hitTest();
+  // Only animate if game is running
+  if (isGameRunning()) {
+    animateVehicles();
+    animatePlayer();
+    hitTest();
+  }
 
   renderer.render(scene, camera);
 }
